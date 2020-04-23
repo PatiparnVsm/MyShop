@@ -4,7 +4,9 @@ using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemeory;
 using MyShop.DataAccess.SQL;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 namespace MyShopUI.Controllers
 {
@@ -35,7 +37,7 @@ namespace MyShopUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProductManagerViewModel p)
+        public ActionResult Create(ProductManagerViewModel p, HttpPostedFileBase file)
         {
             Product product = p.Product;
             if (!ModelState.IsValid)
@@ -45,6 +47,12 @@ namespace MyShopUI.Controllers
 
             else
             {
+
+                if(file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content/ProductImages/") + product.Image); 
+                }
                 context.Insert(product);
                 context.Commit();
 
@@ -69,7 +77,7 @@ namespace MyShopUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
             Product productToEdit = context.Find(Id);
             if (productToEdit == null)
@@ -83,11 +91,17 @@ namespace MyShopUI.Controllers
                     return View(product);
                 }
 
+                if (file != null)
+                {
+                    productToEdit.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content/ProductImages/") + productToEdit.Image);
+                }
+
                 productToEdit.Name = product.Name;
                 productToEdit.Description = product.Description;
                 productToEdit.Price = product.Price;
                 productToEdit.Category = product.Category;
-                productToEdit.Image = product.Image;
+                
 
                 context.Update(productToEdit);
                 context.Commit();
