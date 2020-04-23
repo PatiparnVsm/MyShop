@@ -256,13 +256,13 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\ProductManagement\Index.cshtml" />
-    <Content Include="Views\ProductManagement\Create.cshtml" />
     <Content Include="Views\ProductManagement\Edit.cshtml" />
     <Content Include="Views\ProductManagement\Delete.cshtml" />
     <Content Include="Views\ProductCategoryManagement\Index.cshtml" />
     <Content Include="Views\ProductCategoryManagement\Create.cshtml" />
     <Content Include="Views\ProductCategoryManagement\Edit.cshtml" />
     <Content Include="Views\ProductCategoryManagement\Delete.cshtml" />
+    <Content Include="Views\ProductManagement\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

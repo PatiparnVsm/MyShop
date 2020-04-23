@@ -1,6 +1,7 @@
 ﻿using MyShop.Core.Contracts;
 using MyShop.Core.Models;
 using MyShop.DataAccess.InMemeory;
+using MyShop.DataAccess.SQL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace MyShopUI.Controllers
     {
         IRepository<ProductCategory> context;
 
-        public ProductCategoryManagementController(InMemoryRepository<ProductCategory> productContext)
+        public ProductCategoryManagementController(SQLRepository<ProductCategory> productContext)
         {
             context = productContext;
         }
@@ -104,7 +105,7 @@ namespace MyShopUI.Controllers
             ProductCategory productToDelete = context.Find(Id);
             if (productToDelete != null)
             {
-                context.Delete(productToDelete);
+                context.Delete(Id);
                 context.Commit();
                 return RedirectToAction("Index");
             }

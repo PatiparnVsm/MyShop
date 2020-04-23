@@ -2,6 +2,7 @@
 using MyShop.Core.Models;
 using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemeory;
+using MyShop.DataAccess.SQL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,7 +13,7 @@ namespace MyShopUI.Controllers
         IRepository<Product> context;
         IRepository<ProductCategory> productCategories;
 
-        public ProductManagementController(InMemoryRepository<Product> productContext, InMemoryRepository<ProductCategory> productCategoryContext)
+        public ProductManagementController(SQLRepository<Product> productContext, SQLRepository<ProductCategory> productCategoryContext)
         {
             context = productContext;
             productCategories = productCategoryContext;
@@ -34,16 +35,17 @@ namespace MyShopUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product p)
+        public ActionResult Create(ProductManagerViewModel p)
         {
+            Product product = p.Product;
             if (!ModelState.IsValid)
             {
-                return View(p);
+                return View(product);
             }
 
             else
             {
-                context.Insert(p);
+                context.Insert(product);
                 context.Commit();
 
                 return RedirectToAction("Index");
@@ -58,7 +60,7 @@ namespace MyShopUI.Controllers
                 ProductManagerViewModel viewModel = new ProductManagerViewModel();
                 viewModel.Product = product;
                 viewModel.ProductCategory = productCategories.Collection();
-                return View(product);
+                return View(viewModel);
             }
             else
             {
@@ -114,7 +116,7 @@ namespace MyShopUI.Controllers
             Product productToDelete = context.Find(Id);
             if (productToDelete != null)
             {
-                context.Delete(productToDelete);
+                context.Delete(Id);
                 context.Commit();
                 return RedirectToAction("Index");
             }

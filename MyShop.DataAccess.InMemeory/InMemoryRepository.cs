@@ -9,7 +9,7 @@ using MyShop.Core.Contracts;
 
 namespace MyShop.DataAccess.InMemeory
 {
-    public class InMemoryRepository<T> : Core.Contracts.IRepository<T>  where T: BaseEntity
+    public class InMemoryRepository<T> : IRepository<T>  where T: BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -69,9 +69,9 @@ namespace MyShop.DataAccess.InMemeory
             return items.AsQueryable();
         }
 
-        public void Delete(T t)
+        public void Delete(string Id)
         {
-            T tToDelete = items.Find(i => i.Id == t.Id);
+            T tToDelete = items.Find(i => i.Id == Id);
 
             if (tToDelete != null)
             {
