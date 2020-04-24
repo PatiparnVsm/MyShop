@@ -93,7 +93,7 @@ namespace MyShop.Services
         public void RemoveFromBasket(HttpContextBase httpContext, string productId)
         {
             Basket basket = GetBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductId == productId);
+            BasketItem item = basket.BasketItems.FirstOrDefault(i => i. ProductId == productId);
 
             if (item != null)
             {
@@ -108,13 +108,13 @@ namespace MyShop.Services
         {
             Basket basket = GetBasket(httpcontext, false);
 
-            if (basket == null)
+            if (basket != null)
             {
                 var result = (from b in basket.BasketItems
                               join p in productContext.Collection() on b.ProductId equals p.Id
                               select new BasketItemViewModel()
                               {
-                                  Id = b.Id,
+                                  Id = b.ProductId,
                                   Quantity = b.Quantity,
                                   ProductName = p.Name,
                                   Image = p.Image,

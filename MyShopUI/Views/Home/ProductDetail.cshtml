@@ -45,6 +45,11 @@
         <dd>
             @Html.DisplayFor(model => model.Category)
         </dd>
+        <dt>
+        </dt>
+        <dd>
+            <a class="btn btn-primary" href="@Url.Action("AddToBasket","Basket", new { id = Model.Id})">Add To Basket</a>
+        </dd>
 
 
     </dl>
