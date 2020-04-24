@@ -44,6 +44,20 @@ namespace MyShopUI.Controllers
 
             return PartialView(basketSummary);
         }
+
+        public ActionResult IncreaseItemFromBasket(string Id)
+        {
+            basketService.IncreaseItemInBasket(this.HttpContext, Id);
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DecreaseItemFromBasket(string Id)
+        {
+            basketService.DecreaseItemInBasket(this.HttpContext, Id);
+
+            return RedirectToAction("Index");
+        }
     }
 
 }

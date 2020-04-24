@@ -10,5 +10,7 @@ namespace MyShop.Services
         List<BasketItemViewModel> GetBasketItems(HttpContextBase httpcontext);
         BasketSummaryViewModel GetBasketSummary(HttpContextBase httpcontext);
         void RemoveFromBasket(HttpContextBase httpContext, string productId);
+        void IncreaseItemInBasket(HttpContextBase httpContext, string productId);
+        void DecreaseItemInBasket(HttpContextBase httpContext, string productId);
     }
 }

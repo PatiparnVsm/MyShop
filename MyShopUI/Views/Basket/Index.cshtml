@@ -31,7 +31,9 @@
                 <img class="Img" style="height:50px;" src="~/Content/ProductImages/@item.Image" />
             </td>
             <td>
+                <a href="@Url.Action("DecreaseItemFromBasket","Basket", new { id = item.Id})"><span class="glyphicon glyphicon-minus"></span></a>
                 @Html.DisplayFor(modelItem => item.Quantity)
+                <a href="@Url.Action("IncreaseItemFromBasket","Basket", new { id = item.Id})"><span class="glyphicon glyphicon-plus"></span></a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
